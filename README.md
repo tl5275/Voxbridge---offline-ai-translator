@@ -133,6 +133,16 @@ Translation will occur after silence.
 
 ---
 
+## 🖥 Application Preview
+
+### 🌙 Dark Mode
+![Dark Mode](assets/screenshots/dark_mode.png)
+
+### ☀ Light Mode
+![Light Mode](assets/screenshots/light_mode.png)
+
+---
+
 ## 📊 Performance
 
 | Stage | Avg Latency |
