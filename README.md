@@ -1,198 +1,304 @@
-# 🌍 VoxBridge – Offline AI Voice Translator
+# VoxBridge — Fully Offline AI Voice Translator
 
-![Python](https://img.shields.io/badge/Python-3.10+-blue)
-![Offline AI](https://img.shields.io/badge/AI-Fully%20Offline-green)
-![Edge Ready](https://img.shields.io/badge/Edge-Deployable-orange)
-![License](https://img.shields.io/badge/License-MIT-lightgrey)
+VoxBridge is a **fully offline, real-time multilingual AI voice translator** with automatic language detection, silence-aware processing, noise robustness, and a modern graphical user interface.
 
-🚀 A fully offline, real-time multilingual AI voice translator with modern GUI, automatic language detection, silence-aware processing, and noise robustness.
+Unlike cloud-based translators, VoxBridge performs **all inference on-device**, ensuring:
 
----
-
-## 🧠 Problem Statement
-
-Most real-time translation systems rely on cloud APIs. In rural areas, disaster zones, defense operations, and low-connectivity environments, internet-based solutions fail.
-
-We built a **fully offline AI-powered voice translator** that works in real-time without internet access.
+- Complete privacy  
+- Low latency  
+- No internet dependency  
+- Edge-device suitability  
 
 ---
 
-## 💡 Our Solution
+# Key Features
 
-VoxBridge enables:
-
-- 🎤 Real-time speech capture
-- 🔇 Silence-aware sentence processing
-- 🧠 Automatic language detection
-- 🌍 Neural machine translation
-- 🔊 Offline speech synthesis
-- 🎨 Modern, production-level GUI
-
-All running locally on CPU.
-
----
-
-## ✨ Key Features
-
-### 🎛 Multi-Language Target Selection
-- 🇮🇳 Hindi
-- 🇩🇪 German
-- 🇫🇷 French
-- 🇪🇸 Spanish
-- Easily extendable
-
-### 🧠 Automatic Language Detection
-User can speak in any supported language.
-Whisper auto-detects input language.
-
-### 🔇 Silence Detection
-Processes speech only after silence (Google Translate style).
-
-### 🎤 Noise Robustness
-- Spectral noise reduction
-- WebRTC Voice Activity Detection
-- Stable performance in noisy environments
-
-### 🎨 Modern GUI
-- 🌙 Dark / Light toggle
-- 📦 Framed layout
-- 🎛 Styled rounded buttons
-- 📊 Latency display
-- 🔵 Live waveform visualization
-- 🟣 Real-time typing animation
-- 🟢 Listening indicator
-
-### 🔊 Fully Offline
-No cloud APIs. No internet required after initial model download.
+- Selectable Target Language (English → Hindi, German, French, etc.)
+- Automatic Spoken Language Detection
+- Offline Neural Machine Translation
+- Silence Detection (Voice Activity Detection)
+- Noise Robustness
+- Offline Text-to-Speech
+- Real-time Latency Display
+- Modern GUI (Dark/Light Mode)
+- CPU-Based Execution (No GPU required)
 
 ---
 
-## 🏗 System Architecture
+# System Architecture
 
-Microphone  
+Audio Input  
 ↓  
-WebRTC VAD (Silence Detection)  
+Voice Activity Detection  
 ↓  
 Noise Reduction  
 ↓  
 Faster-Whisper (Auto Language Detection + STT)  
 ↓  
-MarianMT Neural Translation  
+MarianMT Transformer (Translation)  
 ↓  
 Offline Text-to-Speech  
 ↓  
-Modern GUI  
+GUI Output  
 
-### 📊 Architecture Diagram
+All processing runs locally. No cloud APIs are used.
+
+### Architecture Diagram
 
 ![Architecture](assets/architecture.png)
 
 ---
 
-## ⚙ Installation
+# ⚙️ Installation Guide (CRITICAL: Python Version Requirement)
 
-### 1️⃣ Clone Repository
+## Python Version Requirement
 
-```bash
-git clone https://github.com/tl5275/voxbridge-offline-ai-translator.git
-cd voxbridge-offline-ai-translator
+VoxBridge is tested and verified with:
+
+```
+Python 3.11.9
 ```
 
-### 2️⃣ Create Virtual Environment
+⚠️ Python 3.13 is NOT supported due to compatibility issues with:
+- faster-whisper
+- ctranslate2
+- PyTorch builds
+
+Use Python 3.11.x only.
+
+---
+
+# Step 1 — Install Python 3.11.9
+
+Download:
+
+https://www.python.org/downloads/release/python-3119/
+
+During installation:
+
+✔ Add Python to PATH  
+✔ Install for all users  
+
+Verify:
 
 ```bash
-python -m venv venv
-source venv/bin/activate      # Mac/Linux
-venv\Scripts\activate         # Windows
+python --version
 ```
 
-### 3️⃣ Install Dependencies
-
-```bash
-pip install -r requirements.txt
+Expected:
 ```
-
-### 4️⃣ Install FFmpeg
-
-Windows:
-Download from https://www.gyan.dev/ffmpeg/builds/
-
-Mac:
-```bash
-brew install ffmpeg
+Python 3.11.9
 ```
 
 ---
 
-## ▶ Run Application
+# Step 2 — Clone Repository
+
+```bash
+git clone https://github.com/tl5275/Voxbridge-offline-ai-translator.git
+cd Voxbridge-offline-ai-translator
+```
+
+---
+
+# Step 3 — Create Virtual Environment
+
+```bash
+python -m venv venv
+```
+
+### Windows
+
+Activate:
+
+```bash
+venv\Scripts\activate
+```
+
+---
+
+### macOS
+
+Activate:
+
+```bash
+source venv/bin/activate
+```
+
+---
+
+# Step 4 — Install Dependencies
+
+```bash
+pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+---
+
+# Step 5 — Install FFmpeg (Required)
+
+## Windows
+
+1. Download from:
+   https://www.gyan.dev/ffmpeg/builds/
+
+2. Extract to:
+```
+C:\Users\YourName\ffmpeg
+```
+
+3. Add:
+```
+C:\Users\YourName\ffmpeg\bin
+```
+to System PATH.
+
+Verify:
+```bash
+ffmpeg -version
+```
+
+---
+
+## macOS
+
+Install using Homebrew:
+
+```bash
+brew install ffmpeg
+```
+
+If Homebrew is not installed:
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+Verify:
+```bash
+ffmpeg -version
+```
+
+---
+
+# Step 6 — Run Application
 
 ```bash
 python main.py
 ```
 
-Select target language.
-Click Start.
-Speak naturally.
-Translation will occur after silence.
+---
+
+# Performance Overview
+
+| Stage | Avg Latency |
+|--------|------------|
+| Speech Recognition | 300–800 ms |
+| Translation | 200–400 ms |
+| Text-to-Speech | 100–200 ms |
+| End-to-End | ~1 second |
+
+Execution Mode: CPU-only  
+Internet Required: No  
+
+---
+
+# 🔬 Technical Stack
+
+- Faster-Whisper
+- MarianMT
+- CTranslate2
+- PyAudio
+- pyttsx3
+- Tkinter
+- FFmpeg
+
+---
+
+# Offline vs Cloud Comparison
+
+| Feature | Cloud Systems | VoxBridge |
+|----------|---------------|------------|
+| Internet Required | Yes | No |
+| Data Privacy | Low | High |
+| Server Dependency | Yes | No |
+| Latency Stability | Network Dependent | Stable |
+| Edge Deployment | Limited | Fully Supported |
+
+---
+
+# Energy Efficiency
+
+Cloud-based systems require:
+- Network transmission energy
+- Remote server inference
+- Data center overhead
+
+VoxBridge:
+- Eliminates transmission energy
+- Performs local CPU inference
+- Suitable for edge devices
+
+Estimated CPU draw:
+15–25W during active inference.
+
+---
+
+# 🛠 Troubleshooting
+
+If installation fails:
+
+```bash
+pip install ctranslate2==4.4.0
+pip install faster-whisper==1.0.3
+```
+
+If issues persist:
+
+- Ensure Python 3.11 is active
+- Delete and recreate virtual environment
+- Verify FFmpeg installation
+
+---
+
+# Tested Environment
+
+| Component | Version |
+|------------|----------|
+| Python | 3.11.9 |
+| OS | Windows 11 / macOS |
+| CPU | Intel i5 / i7 / Apple Silicon |
+| GPU | Not required |
+| Mode | Fully Offline |
 
 ---
 
 ## 🖥 Application Preview
 
-### 🌙 Dark Mode
+### Dark Mode
 ![Dark Mode](assets/screenshots/dark_mode.png)
 
-### ☀ Light Mode
+### Light Mode
 ![Light Mode](assets/screenshots/light_mode.png)
 
 ---
 
-## 📊 Performance
+# Authors
 
-| Stage | Avg Latency |
-|-------|------------|
-| Speech Recognition | 300–800 ms |
-| Translation | 200–400 ms |
-| End-to-End | ~1 second |
+Tufan Layek  
+Protyay Saha  
+Rounack Sarkar
 
-CPU-based execution. No GPU required.
+SRM Institute of Science and Technology  
 
 ---
 
-## 🎯 Use Cases
-
-- Rural healthcare communication
-- Disaster response systems
-- Defense field deployment
-- Travel translation device
-- Accessibility technology
-- Edge AI applications
-
----
-
-## 🧠 Technologies Used
-
-- Faster-Whisper
-- MarianMT (Helsinki-NLP)
-- WebRTC VAD
-- Noisereduce
-- CustomTkinter
-- Matplotlib
-- PyTorch
-
----
-
-## 🏆 Value Proposition
-
-✔ Fully Offline AI  
-✔ Real-Time Processing  
-✔ Edge Deployable  
-✔ No Cloud Dependency  
-✔ Production-Level GUI  
-✔ Scalable Architecture  
-
----
-
-## 📜 License
+# License
 
 MIT License
+
+---
+
+
+**VoxBridge — Bridging Languages Without the Cloud**
